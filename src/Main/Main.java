@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 //import vues.Fenetre;
-import vues.Fenetre2;
+//import vues.Fenetre2;
 import vues.Demarrage;
 
 public class Main {
