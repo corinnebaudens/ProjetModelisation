@@ -13,15 +13,18 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import com.oracle.xmlns.internal.webservices.jaxws_databinding.SoapBindingParameterStyle;
 
 
 
-public class Demarrage {
+
+public class Demarrage implements ActionListener{
 
 	JScrollPane scrollTitre, scrollTraitement, scrollGraph;
 	JList ListTitre, ListTraitement, ListGraph;
 	JButton Bouton;
 	JPanel panG, panC, panD, panelBouton;
+
 	//JSplitPane pSepare;
 	
 	public Demarrage()
@@ -29,8 +32,7 @@ public class Demarrage {
 		  JFrame fen= new JFrame("Traitement de Séries chronologiques boursières");
 		  		  
 		  //panneau gauche
-		  String [] itemsTitre = {"AI.AP", "CAC40","yy","yy","tt","uu","tt","uu","ii","tt","ii","ii",
-	      "ii","ii","ii","ii"};
+		  String [] itemsTitre = {"AI.PA", "ALU.PA","AIR.PA","BN.PA","CA.PA","OR.PA"};
 		  ListTitre = new JList(itemsTitre);
 	      ListTitre.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	      scrollTitre = new JScrollPane(ListTitre);
@@ -46,12 +48,24 @@ public class Demarrage {
 	      
 	      
 	      		//ajout du bouton au panneau gauche
-	      		Bouton = new JButton("<Html>Charger le<br>titre sélectionné<Html>");
+	      		Bouton = new JButton("<Html>Charger le<br>titre sélectionné</Html>");
 	      		panelBouton = new JPanel();
 	      		panelBouton.setPreferredSize(new Dimension(400,500));
 	      		Bouton.setPreferredSize(new Dimension(140,40));
 	      		panelBouton.add(Bouton);
 	      		panelBouton.setOpaque(false);
+	      		
+	      		Bouton.addActionListener(new ActionListener() {
+	      			public void actionPerformed(ActionEvent evt) {
+	      				
+	      				JDialog coucou = new JDialog();
+	      				coucou.setTitle("essai graph");
+	      				coucou.setLocation(900, 100);
+	      				coucou.setPreferredSize(new Dimension(200,200));
+	      				coucou.pack();
+	      				coucou.setVisible(true);
+	      			}
+	      		});
 	      		//fin de l'ajout du bouton
 	      		
 	      panG.add(panelBouton);
@@ -60,7 +74,7 @@ public class Demarrage {
 	      
 	      
 	      //panneau central
-	      String [] itemsTraitement = {"régression","moyennemobile"};
+	      String [] itemsTraitement = {"Régression linéaire","Moyenne Mobile"};
 	      ListTraitement = new JList(itemsTraitement);
 	      ListTraitement.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	      scrollTraitement = new JScrollPane(ListTraitement);
@@ -81,7 +95,7 @@ public class Demarrage {
 	      ListGraph = new JList(test);
 	      scrollGraph = new JScrollPane(ListGraph); 
 	      Border EtchedBorderbd = BorderFactory.createEtchedBorder();
-	      Border bd = BorderFactory.createTitledBorder(EtchedBorderbd,"Résultat Graphique",
+	      Border bd = BorderFactory.createTitledBorder(EtchedBorderbd,"Résultat graphique",
 	    		  TitledBorder.LEFT, TitledBorder.TOP,new Font("Arial", Font.BOLD,13),Color.BLUE);
 	      scrollGraph.setBorder(bd);
 	      scrollGraph.setPreferredSize(new Dimension(450,500));
@@ -104,5 +118,36 @@ public class Demarrage {
 		  fen.pack();
 		  fen.setLocationRelativeTo(null);
 		  fen.setResizable(false);
+		  
+		  // ajout de la fenêtre modale
+		  JDialog modal = new JDialog(fen,false);
+	      modal.setTitle("Bienvenue sur notre application boursière");
+	      modal.setPreferredSize(new Dimension(400,300));
+	      modal.setLocation(500, 200);
+	      //modal.setUndecorated(true);
+	      modal.pack();
+	      modal.setVisible(true);
+	      modal.setResizable(false);
+	      JLabel label = new JLabel();
+	      label.setBackground(Color.ORANGE);
+	      label.setOpaque(true);
+	      label.setText("<Html><br>Bienvenue sur notre application boursière !<br><br><br>"
+	      		+ "L'application est composée de 3 panneaux:<br><ul><li>Liste des titres</li>"
+	      		+ "<li>Liste des traitements</li><li>Résultat graphique</li></ul>"
+	      		+ "<br>Vous devez commencer par séléctionner le titre boursier<br>que vous souhaitez analyser"
+	      		+ " et cliquer sur le bouton<br>charger le titre sélectionné"
+	      		+ "<br>ensuite vous devez choisir le traitement mathématique à appliquer."
+	      		+ "<br><br>Vous verrez alors apparaitre le graphique correspondant à vos choix<br><br>.<Html>");
+	      modal.add(label, BorderLayout.PAGE_START);
+	      
+	      
+		  
+	     
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
