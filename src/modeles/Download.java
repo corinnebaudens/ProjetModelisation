@@ -55,11 +55,7 @@ public class Download {
 		}
 		return save;
 	}
-
-	public static void main (String [] args){
 	
-		Download dl = new Download("AI.PA", 2015, 12, 01, 2015, 12, 29);
-	}
 }
 
 
