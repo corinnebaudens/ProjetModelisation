@@ -15,6 +15,8 @@ import javax.swing.border.TitledBorder;
 
 import com.oracle.xmlns.internal.webservices.jaxws_databinding.SoapBindingParameterStyle;
 
+import modeles.Download;
+
 
 
 
@@ -57,6 +59,11 @@ public class Demarrage implements ActionListener{
 	      		
 	      		Bouton.addActionListener(new ActionListener() {
 	      			public void actionPerformed(ActionEvent evt) {
+	      				
+	      				/* Essai pour le téléchargement d'un fichier csv
+	      				 * Pour l'instant, celui-ci se fait à la racine du projet
+	      				 */
+	      				Download dl = new Download("AI.PA", 2015, 12, 01, 2015, 12, 29);
 	      				
 	      				JDialog coucou = new JDialog();
 	      				coucou.setTitle("essai graph");
