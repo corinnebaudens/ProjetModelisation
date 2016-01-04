@@ -15,6 +15,7 @@ import javax.swing.border.TitledBorder;
 
 import com.oracle.xmlns.internal.webservices.jaxws_databinding.SoapBindingParameterStyle;
 
+import controleur.Controleur;
 import modeles.Download;
 
 
@@ -29,7 +30,7 @@ public class Demarrage implements ActionListener{
 
 	//JSplitPane pSepare;
 	
-	public Demarrage()
+	public Demarrage(Controleur controleur)
 	{
 		  JFrame fen= new JFrame("Traitement de Séries chronologiques boursières");
 		  		  

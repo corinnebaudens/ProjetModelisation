@@ -1,4 +1,4 @@
-package Main;
+/*package Main;
 
 import java.awt.Dimension;
 
@@ -14,3 +14,4 @@ public class Main {
 			Demarrage f = new Demarrage();
 	   }
 }
+*/
