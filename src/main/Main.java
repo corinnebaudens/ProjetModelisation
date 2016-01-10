@@ -1,3 +1,4 @@
+package main;
 /*package Main;
 
 import java.awt.Dimension;
