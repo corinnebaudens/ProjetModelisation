@@ -30,7 +30,13 @@ public class Download {
 				+ "&a=" + (startMonth-1) + "&b=" + startDay + "&c=" + startYear + "&d="
 				+ (endMonth-1) + "&e=" + endDay + "&f=" + endYear + "&g=d&ignore=.csv";
 		try {
+			
 			URL url = new URL(link);
+			
+
+			System.setProperty("http.proxyHost", "cache.univ-lille1.fr");
+			System.setProperty("http.proxyPort", "3128");
+			
 			
 			InputStreamReader isr = new InputStreamReader(url.openStream());
 			BufferedReader in = new BufferedReader(isr);
@@ -41,6 +47,7 @@ public class Download {
 				out.println(input);
 				input = in.readLine();
 			}
+			
 			in.close();
 			out.close();
 			return save;
