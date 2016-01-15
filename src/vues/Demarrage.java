@@ -12,13 +12,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-
-import com.oracle.xmlns.internal.webservices.jaxws_databinding.SoapBindingParameterStyle;
-
 import controleur.Controleur;
 import modeles.Download;
-
-
 
 
 public class Demarrage implements ActionListener{
@@ -153,7 +148,6 @@ public class Demarrage implements ActionListener{
 	     
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		
