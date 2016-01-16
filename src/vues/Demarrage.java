@@ -12,23 +12,33 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+//import com.oracle.xmlns.internal.webservices.jaxws_databinding.SoapBindingParameterStyle;
+
 import controleur.Controleur;
 import modeles.Download;
 
 
-public class Demarrage implements ActionListener{
+
+
+public class Demarrage implements ActionListener, ListSelectionListener {
 
 	JScrollPane scrollTitre, scrollTraitement, scrollGraph;
 	JList ListTitre, ListTraitement, ListGraph;
 	JButton Bouton;
-	JPanel panG, panC, panD, panelBouton;
-
+	JPanel panG, panC, panD, panelBouton, panelPeriode;
+	JTextField text;
+	
 	//JSplitPane pSepare;
 	
-	public Demarrage(Controleur controleur)
+	public Demarrage(Controleur controleur) 
 	{
-		  JFrame fen= new JFrame("Traitement de Séries chronologiques boursières");
-		  		  
+		  
+		  final JFrame fen= new JFrame("Traitement de Séries chronologiques boursières");
+	      fen.setPreferredSize(new Dimension(900,630));
+		  	  		  
 		  //panneau gauche
 		  String [] itemsTitre = {"AI.PA", "ALU.PA","AIR.PA","BN.PA","CA.PA","OR.PA"};
 		  ListTitre = new JList(itemsTitre);
@@ -49,7 +59,7 @@ public class Demarrage implements ActionListener{
 	      		Bouton = new JButton("<Html>Charger le<br>titre sélectionné</Html>");
 	      		panelBouton = new JPanel();
 	      		panelBouton.setPreferredSize(new Dimension(400,500));
-	      		Bouton.setPreferredSize(new Dimension(140,40));
+	      		Bouton.setPreferredSize(new Dimension(140,50));
 	      		panelBouton.add(Bouton);
 	      		panelBouton.setOpaque(false);
 	      		
@@ -59,14 +69,25 @@ public class Demarrage implements ActionListener{
 	      				/* Essai pour le téléchargement d'un fichier csv
 	      				 * Pour l'instant, celui-ci se fait à la racine du projet
 	      				 */
-	      				Download dl = new Download("AI.PA", 2015, 12, 01, 2015, 12, 29);
+	      				//Download dl = new Download("AI.PA", 2015, 12, 01, 2015, 12, 29);
 	      				
-	      				JDialog coucou = new JDialog();
-	      				coucou.setTitle("essai graph");
-	      				coucou.setLocation(900, 100);
-	      				coucou.setPreferredSize(new Dimension(200,200));
-	      				coucou.pack();
-	      				coucou.setVisible(true);
+	      				//JDialog periode = new JDialog();
+	      				//periode.setTitle("période à définir");
+	      				//periode.setLocation(400, 400);
+	      				//periode.setPreferredSize(new Dimension(200,200));
+	      				//periode.pack();
+	      				//periode.setVisible(true);
+	      				
+	      				JLabel labelDebut = new JLabel("Début :");
+	      				JLabel labelFin = new JLabel("Fin :");
+	      				JTextField debut = new JTextField("YYYY-MM-DD");
+	      				JTextField fin = new JTextField("YYYY-MM-DD");
+	      				JLabel lab = new JLabel ("");
+	      				Object [] tab = new Object [] {labelDebut, debut, labelFin, fin, lab};
+	      				int rep = JOptionPane.showOptionDialog(fen, tab, "Entrez dates de début et fin de période", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null,null);
+	      				//JOptionPane jop = new JOptionPane();
+	      				//String name = jop.showInputDialog(null, "Entrez dates de début et de fin de période","périodes à définir",JOptionPane.QUESTION_MESSAGE);
+	      				
 	      			}
 	      		});
 	      		//fin de l'ajout du bouton
@@ -85,7 +106,7 @@ public class Demarrage implements ActionListener{
 	      Border bc = BorderFactory.createTitledBorder(EtchedBorderbc,"Liste des traitements",
 	    		  TitledBorder.LEFT, TitledBorder.TOP,new Font("Arial", Font.BOLD,13),Color.BLUE);
 	      scrollTraitement.setBorder(bc);
-	      scrollTraitement.setPreferredSize(new Dimension(150,500));
+	      scrollTraitement.setPreferredSize(new Dimension(250,500));
 	      panC = new JPanel();
 	      panC.setPreferredSize(new Dimension(200,500));
 	      //panC.setLayout(new FlowLayout());
@@ -113,24 +134,24 @@ public class Demarrage implements ActionListener{
 	      fen.getContentPane().add(panG, BorderLayout.WEST);
 	      fen.getContentPane().add(panC, BorderLayout.CENTER);
 	      fen.getContentPane().add(panD, BorderLayout.EAST);
-	      fen.setPreferredSize(new Dimension(800,600));
+	
 	      fen.getRootPane().setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.DARK_GRAY));
 	      //fen.getRootPane().setBackground(BackgroundFactory.);
 	      fen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	      fen.setVisible(true);
-		  fen.pack();
-		  fen.setLocationRelativeTo(null);
+	      fen.pack();
+	      fen.setLocationRelativeTo(null);
 		  fen.setResizable(false);
+		  fen.setVisible(true);
 		  
 		  // ajout de la fenêtre modale
 		  JDialog modal = new JDialog(fen,false);
 	      modal.setTitle("Bienvenue sur notre application boursière");
-	      modal.setPreferredSize(new Dimension(400,300));
-	      modal.setLocation(500, 200);
+	      modal.setPreferredSize(new Dimension(500,300));
+	      modal.setLocation(580, 280);
 	      //modal.setUndecorated(true);
 	      modal.pack();
-	      modal.setVisible(true);
 	      modal.setResizable(false);
+	      modal.setVisible(true);
 	      JLabel label = new JLabel();
 	      label.setBackground(Color.ORANGE);
 	      label.setOpaque(true);
@@ -148,7 +169,14 @@ public class Demarrage implements ActionListener{
 	     
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
