@@ -10,23 +10,23 @@ import java.util.Calendar;
 /**
  * Gestion d'une 'cotation' journalière
  * @author Vincent
- *
  */
 public class Cotation {
 	
 	// Attributs
 	private String ticker;
 	private GregorianCalendar date;
-	private float open;
-	private float high;
-	private float low;
-	private float close;
+	private double open;
+	private double high;
+	private double low;
+	private double close;
 	private int volume;
-	private float adjusted;
+	private double adjusted;
 	private String[] data;
 	
 	// Constructeurs
-	public Cotation(String ticker, String date, float open, float high, float low, float close, int volume, float adjusted) {
+	public Cotation(String ticker, String date, double open, double high, double low, double close,
+			int volume, double adjusted) {
 		this.ticker = ticker;
 		this.date = parseDate(date);
 		this.open = open;
@@ -37,6 +37,18 @@ public class Cotation {
 		this.adjusted = adjusted;
 	}
 	
+	public Cotation(String ticker, GregorianCalendar date, double open, double high, double low,
+			double close, int volume, double adjusted) {
+		this.ticker = ticker;
+		this.date = date;
+		this.open = open;
+		this.high = high;
+		this.low = low;
+		this.close = close;
+		this.volume = volume;
+		this.adjusted = adjusted;
+	}
+
 	public Cotation (String ticker, String data, String separator) {
 		this.ticker = ticker;
 		this.data = data.split(separator);
@@ -58,7 +70,7 @@ public class Cotation {
 	}
 	
 	/**
-	 * @return the date
+	 * @return the date as a GragorianCalendar
 	 */
 	public GregorianCalendar getDate() {
 		return date;
@@ -68,34 +80,35 @@ public class Cotation {
 	 * @return the date as a String
 	 */
 	public String getDateFormatted() {
-		return date.get(Calendar.YEAR) + "-" + (date.get(Calendar.MONTH)+1) + "-" + date.get(Calendar.DAY_OF_MONTH);
+		return date.get(Calendar.YEAR) + "-" + (date.get(Calendar.MONTH)+1) + "-"
+				+ date.get(Calendar.DAY_OF_MONTH);
 	}
 	
 	/**
 	 * @return the open
 	 */
-	public float getOpen() {
+	public double getOpen() {
 		return open;
 	}
 
 	/**
 	 * @return the high
 	 */
-	public float getHigh() {
+	public double getHigh() {
 		return high;
 	}
 
 	/**
 	 * @return the low
 	 */
-	public float getLow() {
+	public double getLow() {
 		return low;
 	}
 
 	/**
 	 * @return the close
 	 */
-	public float getClose() {
+	public double getClose() {
 		return close;
 	}
 
@@ -109,13 +122,13 @@ public class Cotation {
 	/**
 	 * @return the adjusted
 	 */
-	public float getAdjusted() {
+	public double getAdjusted() {
 		return adjusted;
 	}
 	
 	// Méthodes accessibles dans le package
 	/**
-	 * Transforme la date donnée sous forme de chaine de caractère en objet GregorienCalendar 
+	 * Transforme la date donnée sous forme de chaine de caractères en objet GregorienCalendar 
 	 * @return the date
 	 */
 	protected static GregorianCalendar parseDate(String chaine) {
@@ -133,12 +146,13 @@ public class Cotation {
 	
 	// Méthodes publiques
 	/**
-	 * Convertit l'objet en chaine de caractère équivalente pour insetion dans un fichier CSV
-	 * @return une chaine de caractère
+	 * Convertit l'objet en chaine de caractères équivalente pour insertion dans un fichier CSV
+	 * @return une chaine de caractères
 	 */
 	public String formatCSV() {
-		return date.get(Calendar.YEAR) + "-" + (date.get(Calendar.MONTH)+1) + "-" + date.get(Calendar.DAY_OF_MONTH) 
-		+ "," + open + "," + high + "," + low + "," + close + "," + volume + "," + adjusted;
+		return date.get(Calendar.YEAR) + "-" + (date.get(Calendar.MONTH)+1) + "-"
+				+ date.get(Calendar.DAY_OF_MONTH) + "," + open + "," + high + "," + low + "," + close
+				+ "," + volume + "," + adjusted;
 	}
 	
 	/* (non-Javadoc)
@@ -146,8 +160,9 @@ public class Cotation {
 	 */
 	@Override
 	public String toString() {
-		return "Cotation [date=" + date.get(Calendar.YEAR) + "-" + (date.get(Calendar.MONTH)+1) + "-" + date.get(Calendar.DAY_OF_MONTH)
-			+ ", open=" + open + ", high=" + high + ", low=" + low + ", close=" + close
-			+ ", volume=" + volume + ", adjusted=" + adjusted + "]";
+		return ticker + " [date=" + date.get(Calendar.YEAR) + "-" + (date.get(Calendar.MONTH)+1)
+				+ "-" + date.get(Calendar.DAY_OF_MONTH) + ", open=" + open + ", high=" + high
+				+ ", low=" + low + ", close=" + close + ", volume=" + volume + ", adjusted="
+				+ adjusted + "]";
 	}
 }
