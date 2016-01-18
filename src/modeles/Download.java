@@ -62,6 +62,14 @@ public class Download {
 		}
 		return save;
 	}
+
+
+	/**
+	 * @return le fichier sous forme d'objet File
+	 */
+	public File getFichier() {
+		return this.fichier;
+	}
 	
 }
 
