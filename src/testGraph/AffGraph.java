@@ -6,12 +6,11 @@ import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 import modeles.Test;
-
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class AffGraph extends JPanel implements Observer {
-	protected static final int GRAPHIC_SIZE = 300 ;
+	protected static final int GRAPHIC_SIZE = 500 ;
 	Test modele ;
 	double minX ;
 	double maxX ;
@@ -58,6 +57,9 @@ public class AffGraph extends JPanel implements Observer {
         g.setColor(Color.BLACK);
         g.drawLine(convX(0.0), convY(minY), convX(0.0), convY(maxY) );
         g.drawLine(convX(minX), convY(0.0), convX(maxX), convY(0.0) );
+        
+        
+        
         double x0=0.0;
         double y0=0.0;
         double x1=0.0;
