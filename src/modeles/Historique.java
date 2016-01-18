@@ -1,6 +1,7 @@
 package modeles;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -106,8 +107,7 @@ public class Historique {
 		this.low.add(cot.getLow());
 		this.close.add(cot.getClose());
 		this.volume.add(cot.getVolume());
-		this.adjusted.add(cot.getAdjusted());
-		
+		this.adjusted.add(cot.getAdjusted());	
 	}
 	
 	public Cotation supprimer(int index) {
@@ -132,6 +132,106 @@ public class Historique {
 			index++;
 		}
 		return null;
+	}
+	
+	public Historique histoHebdo() {
+		Historique hebdo = new Historique();
+		String ticker = this.getTicker();
+		int weekOfYear = this.getDateList().get(0).get(Calendar.WEEK_OF_YEAR);
+		Cotation tempCot;
+		int index = 0;
+		while (index < this.taille()){
+			// Initialisation des variables
+			double open = 0.0, close = 0.0, high = -1, low = -1, adjusted = 0.0;
+			int volume = 0, nbCot = 0;
+			// Boucle tant que l'on est dans la même semaine
+			do {
+				tempCot = this.getCotation(index);
+				open += tempCot.getOpen();
+				close += tempCot.getClose();
+				volume += tempCot.getVolume();
+				adjusted += tempCot.getAdjusted();
+				if (low == -1 || tempCot.getLow() < low) low = tempCot.getLow();
+				if (high == -1 || tempCot.getHigh() > high) high = tempCot.getHigh();
+				index++;
+				nbCot++;
+			} while (index < this.taille() && weekOfYear == this.getDateList().get(index).get(Calendar.WEEK_OF_YEAR));
+			// Calcul des moyennes necessaires et ajout à l'historique hebdo
+			open /= nbCot;
+			close /= nbCot;
+			adjusted /= nbCot;
+			hebdo.ajouter(new Cotation(ticker, tempCot.getDateFormatted(), open, high, low, close, volume, adjusted));
+			if(index < this.taille())
+				weekOfYear = this.getDateList().get(index).get(Calendar.WEEK_OF_YEAR);
+		}		
+		return hebdo;
+	}
+	
+	public Historique histoMensuel() {
+		Historique mensuel = new Historique();
+		String ticker = this.getTicker();
+		int month = this.getDateList().get(0).get(Calendar.MONTH);
+		Cotation tempCot;
+		int index = 0;
+		while (index < this.taille()){
+			// Initialisation des variables
+			double open = 0.0, close = 0.0, high = -1, low = -1, adjusted = 0.0;
+			int volume = 0, nbCot = 0;
+			int year = this.getDateList().get(0).get(Calendar.YEAR);
+			// Boucle tant que l'on est dans le même mois
+			do {
+				tempCot = this.getCotation(index);
+				open += tempCot.getOpen();
+				close += tempCot.getClose();
+				volume += tempCot.getVolume();
+				adjusted += tempCot.getAdjusted();
+				if (low == -1 || tempCot.getLow() < low) low = tempCot.getLow();
+				if (high == -1 || tempCot.getHigh() > high) high = tempCot.getHigh();
+				index++;
+				nbCot++;
+			} while (index < this.taille() && month == this.getDateList().get(index).get(Calendar.MONTH));
+			// Calcul des moyennes necessaires et ajout à l'historique mensuel
+			open /= nbCot;
+			close /= nbCot;
+			adjusted /= nbCot;
+			mensuel.ajouter(new Cotation(ticker, new GregorianCalendar(year, month, 1), open, high, low, close, volume, adjusted));
+			if(index < this.taille())
+				month = this.getDateList().get(index).get(Calendar.MONTH);
+		}		
+		return mensuel;
+	}
+	
+	public Historique histoAnnuel() {
+		Historique annuel = new Historique();
+		String ticker = this.getTicker();
+		int year = this.getDateList().get(0).get(Calendar.YEAR);
+		Cotation tempCot;
+		int index = 0;
+		while (index < this.taille()){
+			// Initialisation des variables
+			double open = 0.0, close = 0.0, high = -1, low = -1, adjusted = 0.0;
+			int volume = 0, nbCot = 0;
+			// Boucle tant que l'on est dans la même année
+			do {
+				tempCot = this.getCotation(index);
+				open += tempCot.getOpen();
+				close += tempCot.getClose();
+				volume += tempCot.getVolume();
+				adjusted += tempCot.getAdjusted();
+				if (low == -1 || tempCot.getLow() < low) low = tempCot.getLow();
+				if (high == -1 || tempCot.getHigh() > high) high = tempCot.getHigh();
+				index++;
+				nbCot++;
+			} while (index < this.taille() && year == this.getDateList().get(index).get(Calendar.YEAR));
+			// Calcul des moyennes necessaires et ajout à l'historique annuel
+			open /= nbCot;
+			close /= nbCot;
+			adjusted /= nbCot;
+			annuel.ajouter(new Cotation(ticker, new GregorianCalendar(year, 0, 1), open, high, low, close, volume, adjusted));
+			if(index < this.taille())
+				year = this.getDateList().get(index).get(Calendar.YEAR);
+		}		
+		return annuel;
 	}
 	
 	/* (non-Javadoc)
