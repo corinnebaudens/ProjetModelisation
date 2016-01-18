@@ -10,6 +10,8 @@ public class Main {
 		Test modele = new Test();
 		Controleur controleur = new Controleur(modele);
 		new Affichage (controleur, modele);
+		
+		
 	}
 
 }
