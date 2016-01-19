@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Download {
 	
@@ -17,6 +19,20 @@ public class Download {
 	public Download(String ticker, int startYear, int startMonth, int startDay,
 			int endYear, int endMonth, int endDay)
 	{
+		this.fichier = telecharger(ticker, startYear, (startMonth-1), startDay,
+				endYear, (endMonth-1), endDay);
+	}
+	
+	public Download(String ticker, String debut, String fin)
+	{
+		GregorianCalendar dateD = Cotation.parseDate(debut);
+		GregorianCalendar dateF = Cotation.parseDate(fin);
+		int startYear = dateD.get(Calendar.YEAR);
+		int startMonth = dateD.get(Calendar.MONTH);
+		int startDay = dateD.get(Calendar.DAY_OF_MONTH);
+		int endYear = dateF.get(Calendar.YEAR);
+		int endMonth = dateF.get(Calendar.MONTH);
+		int endDay = dateF.get(Calendar.DAY_OF_MONTH);
 		this.fichier = telecharger(ticker, startYear, startMonth, startDay,
 				endYear, endMonth, endDay);
 	}
@@ -27,8 +43,8 @@ public class Download {
 	{
 		File save = new File(ticker + "-" + startYear + startMonth + startDay + "-" + endYear + endMonth + endDay + ".csv");;
 		String link = "http://real-chart.finance.yahoo.com/table.csv?s=" + ticker
-				+ "&a=" + (startMonth-1) + "&b=" + startDay + "&c=" + startYear + "&d="
-				+ (endMonth-1) + "&e=" + endDay + "&f=" + endYear + "&g=d&ignore=.csv";
+				+ "&a=" + startMonth + "&b=" + startDay + "&c=" + startYear + "&d="
+				+ endMonth + "&e=" + endDay + "&f=" + endYear + "&g=d&ignore=.csv";
 		try {
 			
 			URL url = new URL(link);

@@ -1,7 +1,7 @@
 package testGraph;
 
 import java.awt.Dimension;
-import modeles.Test;
+import modeles.Modele;
 import controleur.Controleur;
 import javax.swing.*;
 
@@ -13,7 +13,7 @@ public class Affichage {
 //	Test modele;
 	
 		
-	Affichage(Controleur controleur, Test modele){
+	Affichage(Controleur controleur, Modele modele){
 	
 	BeauGraphique = new AffGraph(modele);
 		

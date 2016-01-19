@@ -57,7 +57,7 @@ public class ConversionObjectCSV {
 	 * @param histo
 	 * @return le fichier créé
 	 */
-	public static File HistoriqueToCSV(Historique histo){
+	public File HistoriqueToCSV(Historique histo){
 		// Nom de fichier à modifier par la suite (par exemple avec le nom de la modification apportée)
 		File fichier = new File(histo.getTicker() + "-" + histo.getCotation(histo.taille()-1).getDateFormatted().replaceAll("-", "") + 
 				"-" + histo.getCotation(0).getDateFormatted().replaceAll("-", "") + "-historiqueToCSV.csv");

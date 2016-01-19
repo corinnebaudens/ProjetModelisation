@@ -1,40 +1,32 @@
 package controleur;
 import java.io.File;
 
-import modeles.Test;
+import modeles.Modele;
 
 public class Controleur {
 	/*
-	le contrôleur intercepte les actions de l'utilisateur
-	après vérification, il envoit les données au modèle
-	
-	Nous retrouvons donc en attributs les données traitées par le Controleur, que le modèle récupérera :
+	le contrôleur intercepte les actions de l'utilisateur. Après vérification, il envoit les données au modèle	
 	*/
-	protected Test modele;			// instance du modèle (basée pour le moment sur la classe Test)
 
-	/* récupération, soit d'un fichier : */
-	protected File csv;	
-	
-	/*	...soit des données de base pour la classe Download :
-	(=> on pourrait, après vérification, envoyer une seule String déjà concaténée à la classe "Download")	*/
-	protected String ticker;				// String du titre sélectionné par clic (et validé)
-	protected int startYear, startMonth, startDay;	// données pour requête au site boursier
-	protected int endYear, endMonth, endDay;		// données pour requête au site boursier
+	protected Modele modele;
 
-	protected String traitement;			// String du traitement sélectionné par clic (et validé)	
-
-	
-	
-	public Controleur(Test bourse){					// constructeur du contrôleur
-		this.modele=bourse;
-		
+	public Controleur(Modele bourse){	// constructeur
+		this.modele=bourse;		
 	}
+	
+
+	public Double[][] graphRequest (String ticker, String dateDebut, String dateFin){
+		
+		// vérifier que la chaîne de caractères est valide
+		
+		return modele.getData(ticker, dateDebut, dateFin);				
+	}
+	
 	
 	public void control(){
 		/*
 		 * si le titre sélectionné est valide, on envoit au modèle
 		 * si le traitement sélectionné est valide, on envoit au modèle
 		*/
-	}
-	
+	}	
 }

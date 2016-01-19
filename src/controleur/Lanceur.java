@@ -1,5 +1,5 @@
 package controleur;
-import modeles.Test;
+import modeles.Modele;
 import testGraph.Demarrage;
 
 public class Lanceur {
@@ -12,7 +12,7 @@ public class Lanceur {
 
 	public static void main(String[] args) {
 
-		Test modele = new Test();
+		Modele modele = new Modele();
 		Controleur controleur = new Controleur(modele);
 		Demarrage vue = new Demarrage(controleur, modele);	// il faut que l'instanciation de la vue
 													// prenne une instance de Controleur en paramètre

@@ -21,9 +21,7 @@ import testGraph.AffGraph;
 
 import controleur.Controleur;
 import modeles.Download;
-import modeles.Test;
-
-
+import modeles.Modele;
 
 
 public class Demarrage implements ActionListener, ListSelectionListener {
@@ -36,7 +34,7 @@ public class Demarrage implements ActionListener, ListSelectionListener {
 	
 	//JSplitPane pSepare;
 	
-	public Demarrage(Controleur controleur, Test modele) 
+	public Demarrage(Controleur controleur, Modele modele) 
 	{
 		  
 		  final JFrame fen= new JFrame("Traitement de Séries chronologiques boursières");
