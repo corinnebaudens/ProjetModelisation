@@ -1,13 +1,11 @@
 package controleur;
 import java.io.File;
-
 import modeles.Modele;
 
 public class Controleur {
 	/*
 	le contrôleur intercepte les actions de l'utilisateur. Après vérification, il envoit les données au modèle	
 	*/
-
 	protected Modele modele;
 
 	public Controleur(Modele bourse){	// constructeur
@@ -16,10 +14,13 @@ public class Controleur {
 	
 
 	public Double[][] graphRequest (String ticker, String dateDebut, String dateFin){
-		
-		// vérifier que la chaîne de caractères est valide
-		
-		return modele.getData(ticker, dateDebut, dateFin);				
+		// todo : vérifier que la chaîne de caractères est valide
+		modele.setData(ticker, dateDebut, dateFin);
+		return modele.getData();
+	}
+	
+	public Double [][]  dataRequest(){
+		return modele.getData();
 	}
 	
 	

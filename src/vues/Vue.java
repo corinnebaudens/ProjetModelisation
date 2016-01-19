@@ -1,4 +1,4 @@
-package testGraph;
+package vues;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,7 +24,7 @@ import modeles.Download;
 import modeles.Modele;
 
 
-public class Demarrage implements ActionListener, ListSelectionListener {
+public class Vue implements ActionListener, ListSelectionListener {
 
 	JScrollPane scrollTitre, scrollTraitement, scrollGraph;
 	JList ListTitre, ListTraitement, ListGraph;
@@ -32,11 +32,13 @@ public class Demarrage implements ActionListener, ListSelectionListener {
 	JPanel panG, panC, panD, panelBouton, panelPeriode;
 	JTextField text;
 	
+	Controleur controleur;
+	
 	//JSplitPane pSepare;
 	
-	public Demarrage(Controleur controleur, Modele modele) 
+	public Vue(Controleur controleur, Modele modele) 
 	{
-		  
+		  this.controleur = controleur;
 		  final JFrame fen= new JFrame("Traitement de Séries chronologiques boursières");
 	      fen.setPreferredSize(new Dimension(900,630));
 		  	  		  
@@ -116,10 +118,11 @@ public class Demarrage implements ActionListener, ListSelectionListener {
 	      
 	      
 	      //panneau droit
-//	      String [] test = {"titi","tutu"};
-	      AffGraph graphique = new AffGraph(modele);
-//	      ListGraph = new JList(test);
-//	      scrollGraph = new JScrollPane(ListGraph); 
+	      
+	      // chargement automatique pour le moment...
+	//      controleur.graphRequest("1", "2", "3");
+	      
+	      AffGraphique graphique = new AffGraphique(modele);
 	      Border EtchedBorderbd = BorderFactory.createEtchedBorder();
 	      Border bd = BorderFactory.createTitledBorder(EtchedBorderbd,"Résultat graphique",
 	    		  TitledBorder.LEFT, TitledBorder.TOP,new Font("Arial", Font.BOLD,13),Color.BLUE);
