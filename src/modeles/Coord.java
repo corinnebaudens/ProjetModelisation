@@ -7,9 +7,11 @@ package modeles;
 public class Coord {
 	double x;
 	double y;
+	String z;
 	
-	public Coord(double x, double y){
+	public Coord(double x, double y, String z){
 		this.x = x;
 		this.y = y;
+		this.z = z;
 	}
 }
