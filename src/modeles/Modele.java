@@ -18,12 +18,12 @@ public class Modele extends Observable{
 	}
 	
 	public void setData(String ticker, String dateDebut, String dateFin){
-//		Download dl = new Download("AI.PA", 2011, 1, 1, 2015, 12, 31);
-//		Historique test = ConversionObjectCSV.CSVToHistorique(dl.getFichier());
+		Download dl = new Download("AI.PA", 2011, 1, 1, 2015, 12, 31);
+		Historique test = ConversionObjectCSV.CSVToHistorique(dl.getFichier());
 		
 //		// Creation d'un objet Historique à partir d'un fichier csv présent sur le disque
-		String nom = ticker + "-" + dateDebut.replaceAll("-", "") + "-" + dateFin.replaceAll("-", "");
-		Historique test = ConversionObjectCSV.CSVToHistorique(new File(nom));
+//		String nom = ticker + "-" + dateDebut.replaceAll("-", "") + "-" + dateFin.replaceAll("-", "");
+//		Historique test = ConversionObjectCSV.CSVToHistorique(new File(nom));
 		
 		int taille = test.taille();
 //		Double[][] vector = new Double[taille][2];
@@ -60,13 +60,13 @@ public class Modele extends Observable{
 	public ArrayList<Coord> getData() {
 		// remplissage temporaire pour test
 		// à supprimer
-		dataBase.add(new Coord(1.0, 3.0, ""));
-		dataBase.add(new Coord(4.0, 1.0, ""));
-		dataBase.add(new Coord(5.0, 2.5, ""));
-		dataBase.add(new Coord(6.0, 9.0, ""));
-		dataBase.add(new Coord(3.0, 5.0, ""));
-		dataBase.add(new Coord(2.0, 8.0, ""));
-		dataBase.add(new Coord(7.0, 2.0, ""));
+//		dataBase.add(new Coord(1.0, 3.0, ""));
+//		dataBase.add(new Coord(2.0, 1.0, ""));
+//		dataBase.add(new Coord(3.0, 2.5, ""));
+//		dataBase.add(new Coord(4.0, 9.0, ""));
+//		dataBase.add(new Coord(5.0, 5.0, ""));
+//		dataBase.add(new Coord(6.0, 8.0, ""));
+//		dataBase.add(new Coord(7.0, 2.0, ""));
 		return dataBase;
 	}
 

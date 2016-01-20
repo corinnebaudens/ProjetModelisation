@@ -16,9 +16,10 @@ public class Controleur {
 	}
 	
 
-	public void graphRequest (String ticker, String dateDebut, String dateFin){
+	public ArrayList<Coord> graphRequest (String ticker, String dateDebut, String dateFin){
 		// todo : vérifier que la chaîne de caractères est valide
 		modele.setData(ticker, dateDebut, dateFin);
+		return modele.getData();
 
 	}
 	

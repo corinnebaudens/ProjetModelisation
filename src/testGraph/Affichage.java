@@ -17,7 +17,7 @@ public class Affichage {
 		
 	Affichage(Controleur controleur, Modele modele){
 	
-	BeauGraphique = new AffGraphique(modele);
+	BeauGraphique = new AffGraphique(modele, controleur);
 		
 	frame.setTitle("Affichage d'un graphique");
 	frame.getContentPane().add(BeauGraphique);

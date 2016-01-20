@@ -122,7 +122,7 @@ public class Vue implements ActionListener, ListSelectionListener {
 	      // chargement automatique pour le moment...
 	//      controleur.graphRequest("1", "2", "3");
 	      
-	      AffGraphique graphique = new AffGraphique(modele);
+	      AffGraphique graphique = new AffGraphique(modele, controleur);
 	      Border EtchedBorderbd = BorderFactory.createEtchedBorder();
 	      Border bd = BorderFactory.createTitledBorder(EtchedBorderbd,"Résultat graphique",
 	    		  TitledBorder.LEFT, TitledBorder.TOP,new Font("Arial", Font.BOLD,13),Color.BLUE);

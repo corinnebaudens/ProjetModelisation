@@ -37,7 +37,6 @@ public class Demarrage {
 	JDialog periode;
 	String rec;
 	Download dl;
-	
 		
 	public Demarrage(Controleur controleur, Modele modele) 
 	{
@@ -95,7 +94,7 @@ public class Demarrage {
 	      
 	      
 	      // Création du panneau droit
-	      PannDroit p = new PannDroit(modele, fen, panD);
+	      PannDroit p = new PannDroit(modele, controleur, fen, panD);
 	      panD = p.getPanD();
 	      
 	     

@@ -17,28 +17,19 @@ import controleur.Controleur;
 public class AffGraphique extends JPanel implements Observer {
 	protected static final int GRAPHIC_SIZE = 400 ;
 	Modele modele ;
+	Controleur controleur;
 	double minX ;
 	double maxX ;
 	double minY ;
 	double maxY ;
-	public AffGraphique(Modele modele) {
+	public AffGraphique(Modele modele, Controleur controleur) {
 		super() ;
 		this.modele = modele ;
+		this.controleur = controleur;
 		modele.addObserver(this) ;
 		this.setPreferredSize(new Dimension(GRAPHIC_SIZE,800)) ;
 	}
 	
-/*	public double[][] getCoordinates (Modele modele){ // valable pour tout tableau ayant le même nombre d'élément à chaque ligne
-		double [][] data = new double [modele.getData().length][modele.getData()[0].length];
-		for(int i=0; i<modele.getData().length; i++){
-			for(int j=0; j<modele.getData()[i].length; j++){
-				data[i][j]=modele.getData()[i][j] ;
-			}
-		}		
-		return data ;
-	}
-*/
-
 //	protected void drawData(Graphics g, Double[][] data) {
 //		// Calcul d'échelle
 //		minX = 0.0 ;
@@ -126,7 +117,7 @@ public class AffGraphique extends JPanel implements Observer {
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);       
 //		Double[][] data = modele.getData();
-		ArrayList<Coord> dataBase = modele.getData();
+		ArrayList<Coord> dataBase = controleur.graphRequest("","","");
 		if (dataBase.isEmpty()) {
 			g.drawString("Pas de donnée à afficher", 10, 20);
 		}

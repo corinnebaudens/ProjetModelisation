@@ -10,15 +10,17 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import controleur.Controleur;
+
 import modeles.Modele;
 
 
 public class PannDroit {
 	JPanel panD;
 	
-	public PannDroit(Modele modele, JFrame fen, JPanel panD){
+	public PannDroit(Modele modele, Controleur controleur, JFrame fen, JPanel panD){
 		
-    AffGraphique graphique = new AffGraphique(modele);
+    AffGraphique graphique = new AffGraphique(modele, controleur);
     Border EtchedBorderbd = BorderFactory.createEtchedBorder();
     Border bd = BorderFactory.createTitledBorder(EtchedBorderbd,"Résultat graphique",
   		  TitledBorder.LEFT, TitledBorder.TOP,new Font("Arial", Font.BOLD,13),Color.BLUE);
