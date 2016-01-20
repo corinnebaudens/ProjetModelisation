@@ -39,20 +39,18 @@ public class Demarrage {//implements ActionListener, ListSelectionListener {
 	Download dl;
 	
 		
-	//JSplitPane pSepare;
-	
 	public Demarrage(Controleur controleur) 
 	{
 		  
 		  final JFrame fen= new JFrame("Traitement de Séries chronologiques boursières");
 	      fen.setPreferredSize(new Dimension(900,630));
 		  	  		  
-		  //panneau gauche
+		  // Création du panneau gauche
+	      
 		  String [] itemsTitre = {"AI.PA", "ALU.PA","AIR.PA","BN.PA","CA.PA","OR.PA"};
 		  ListTitre = new JList(itemsTitre);
 	      ListTitre.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	      scrollTitre = new JScrollPane(ListTitre);
-	      //Border bg = BorderFactory.createTitledBorder("Liste des titres");
 	      Border EtchedBorderbg = BorderFactory.createEtchedBorder();
 	      Border bg = BorderFactory.createTitledBorder(EtchedBorderbg,"Liste des titres",
 	    		  TitledBorder.LEFT, TitledBorder.TOP,new Font("Arial", Font.BOLD,13),Color.BLUE);
@@ -63,7 +61,7 @@ public class Demarrage {//implements ActionListener, ListSelectionListener {
 	      panG.setOpaque(false);
 	      
 	      
-	      		//ajout du bouton au panneau gauche
+	      		// ajout du bouton au panneau gauche
 	      		Bouton = new JButton("<Html>Charger le<br>titre sélectionné</Html>");
 	      		panelBouton = new JPanel();
 	      		panelBouton.setPreferredSize(new Dimension(400,500));
@@ -288,7 +286,7 @@ public class Demarrage {//implements ActionListener, ListSelectionListener {
 				
 			//}
 			
-			dl = new Download("ALU.PA",Integer.parseInt(anneeDebut.getText()),
+			dl = new Download(rec,Integer.parseInt(anneeDebut.getText()),
 					Integer.parseInt(moisDebut.getText()),
 					Integer.parseInt(jourDebut.getText()),
 					Integer.parseInt(anneeFin.getText()),
@@ -381,7 +379,7 @@ public class Demarrage {//implements ActionListener, ListSelectionListener {
 						Object selectionValues[] = list.getSelectedValues();
 						for (int i=0, n=selection.length; i<n ; i++) {
 						System.out.println(selectionValues[i]);
-						String rec = (String) selectionValues[i];
+						rec = (String) selectionValues[i];
 						//dl = new Download(rec, Integer.parseInt(anneeDebut.getText()), Integer.parseInt(moisDebut.getText()), Integer.parseInt(jourDebut.getText()), Integer.parseInt(anneeFin.getText()),
 						//	Integer.parseInt(moisFin.getText()), Integer.parseInt(jourFin.getText()));
 						//dl = new Download("AI.PA",2015,02,02,2015,03,03);
@@ -416,6 +414,3 @@ public class Demarrage {//implements ActionListener, ListSelectionListener {
 		}
 		
 		}
-
-
-
