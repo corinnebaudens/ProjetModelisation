@@ -18,6 +18,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import testGraph.AffGraph;
+
 import controleur.Controleur;
 import modeles.Download;
 import modeles.Modele;
@@ -93,19 +95,8 @@ public class Demarrage {
 	      
 	      
 	      // Création du panneau droit
-	     // new PannDroit(modele, fen, panD);
-	      String [] test = {"titi","tutu"};
-	      ListGraph = new JList(test);
-	      scrollGraph = new JScrollPane(ListGraph); 
-	      Border EtchedBorderbd = BorderFactory.createEtchedBorder();
-	      Border bd = BorderFactory.createTitledBorder(EtchedBorderbd,"Résultat graphique",
-	    		      TitledBorder.LEFT, TitledBorder.TOP,new Font("Arial", Font.BOLD,13),Color.BLUE);
-	      scrollGraph.setBorder(bd);
-	      scrollGraph.setPreferredSize(new Dimension(450,500));
-	      panD = new JPanel();
-	      panD.setPreferredSize(new Dimension(450,500));
-	      panD.add(scrollGraph);
-	      panD.setOpaque(false);
+	      PannDroit p = new PannDroit(modele, fen, panD);
+	      panD = p.getPanD();
 	      
 	     
 	      // Ajout des panneaux à la JFrame

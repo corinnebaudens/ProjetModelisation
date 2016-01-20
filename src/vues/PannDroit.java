@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,6 +14,7 @@ import modeles.Modele;
 
 
 public class PannDroit {
+	JPanel panD;
 	
 	public PannDroit(Modele modele, JFrame fen, JPanel panD){
 		
@@ -29,7 +29,17 @@ public class PannDroit {
    //panD.setLayout(new FlowLayout());
     panD.add(graphique);
     panD.setOpaque(false);
+    this.panD=panD;
    
 	}
 
+	public JPanel getPanD() {
+		return panD;
+	}
+
+	public void setPanD(JPanel panD) {
+		this.panD = panD;
+	}
+
+	
 }
