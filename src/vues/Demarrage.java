@@ -2,11 +2,8 @@ package vues;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -18,12 +15,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import testGraph.AffGraph;
-
 import controleur.Controleur;
 import modeles.Download;
 import modeles.Modele;
-
 
 
 public class Demarrage {
@@ -37,6 +31,7 @@ public class Demarrage {
 	JDialog periode;
 	String rec;
 	Download dl;
+	
 		
 	public Demarrage(Controleur controleur, Modele modele) 
 	{
@@ -96,6 +91,7 @@ public class Demarrage {
 	      // Création du panneau droit
 	      PannDroit p = new PannDroit(modele, controleur, fen, panD);
 	      panD = p.getPanD();
+	      p.dessiner();
 	      
 	     
 	      // Ajout des panneaux à la JFrame

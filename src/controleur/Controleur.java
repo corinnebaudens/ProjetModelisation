@@ -15,19 +15,16 @@ public class Controleur {
 		this.modele=bourse;		
 	}
 	
-
 	public ArrayList<Coord> graphRequest (String ticker, String dateDebut, String dateFin){
 		// todo : vérifier que la chaîne de caractères est valide
 		modele.setData(ticker, dateDebut, dateFin);
 		return modele.getData();
-
 	}
 	
 	public ArrayList<Coord> dataRequest(){
 		return modele.getData();
 	}
-	
-	
+
 	public void control(){
 		/*
 		 * si le titre sélectionné est valide, on envoit au modèle

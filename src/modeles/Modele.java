@@ -58,15 +58,14 @@ public class Modele extends Observable{
 	}
 	
 	public ArrayList<Coord> getData() {
-		// remplissage temporaire pour test
-		// à supprimer
-//		dataBase.add(new Coord(1.0, 3.0, ""));
-//		dataBase.add(new Coord(2.0, 1.0, ""));
-//		dataBase.add(new Coord(3.0, 2.5, ""));
-//		dataBase.add(new Coord(4.0, 9.0, ""));
-//		dataBase.add(new Coord(5.0, 5.0, ""));
-//		dataBase.add(new Coord(6.0, 8.0, ""));
-//		dataBase.add(new Coord(7.0, 2.0, ""));
+/*		remplissage temporaire pour test -> à supprimer
+		dataBase.add(new Coord(1.0, 3.0, ""));
+		dataBase.add(new Coord(2.0, 1.0, ""));
+		dataBase.add(new Coord(3.0, 2.5, ""));
+		dataBase.add(new Coord(4.0, 9.0, ""));
+		dataBase.add(new Coord(5.0, 5.0, ""));
+		dataBase.add(new Coord(6.0, 8.0, ""));
+		dataBase.add(new Coord(7.0, 2.0, ""));*/
 		return dataBase;
 	}
 

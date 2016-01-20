@@ -50,9 +50,9 @@ public class Download {
 			URL url = new URL(link);
 			
 
-			System.setProperty("http.proxyHost", "cache.univ-lille1.fr");
+/*			System.setProperty("http.proxyHost", "cache.univ-lille1.fr");
 			System.setProperty("http.proxyPort", "3128");
-			
+*/			
 			
 			InputStreamReader isr = new InputStreamReader(url.openStream());
 			BufferedReader in = new BufferedReader(isr);
