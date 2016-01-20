@@ -5,17 +5,19 @@ import modeles.Modele;
 import controleur.Controleur;
 import javax.swing.*;
 
+import vues.AffGraphique;
+
 public class Affichage {
 	
 	JFrame frame = new JFrame();
-	AffGraph BeauGraphique;
+	AffGraphique BeauGraphique;
 //	Controleur controleur;
 //	Test modele;
 	
 		
 	Affichage(Controleur controleur, Modele modele){
 	
-	BeauGraphique = new AffGraph(modele);
+	BeauGraphique = new AffGraphique(modele);
 		
 	frame.setTitle("Affichage d'un graphique");
 	frame.getContentPane().add(BeauGraphique);

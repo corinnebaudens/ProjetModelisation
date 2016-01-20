@@ -13,7 +13,7 @@ public class Lanceur {
 	public static void main(String[] args) {
 		Modele modele = new Modele();
 		Controleur controleur = new Controleur(modele);
-		Demarrage vue = new Demarrage(controleur);	// il faut que l'instanciation de la vue
+		Demarrage vue = new Demarrage(controleur, modele);	// il faut que l'instanciation de la vue
 												// prenne une instance de Controleur en paramètre
 	}
 }

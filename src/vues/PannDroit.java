@@ -1,4 +1,4 @@
-package testGraph;
+package vues;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,11 +13,10 @@ import javax.swing.border.TitledBorder;
 
 import modeles.Modele;
 
-import vues.AffGraphique;
 
 public class PannDroit {
 	
-	public PannDroit(Modele modele, JFrame fen, JPanel panG, JPanel panC, JPanel panD){
+	public PannDroit(Modele modele, JFrame fen, JPanel panD){
 		
     AffGraphique graphique = new AffGraphique(modele);
     Border EtchedBorderbd = BorderFactory.createEtchedBorder();
@@ -31,19 +30,6 @@ public class PannDroit {
     panD.add(graphique);
     panD.setOpaque(false);
    
-    //ajout des panneaux à la JFrame
-    fen.getContentPane().setBackground(Color.LIGHT_GRAY);
-    fen.getContentPane().add(panG, BorderLayout.WEST);
-    fen.getContentPane().add(panC, BorderLayout.CENTER);
-    fen.getContentPane().add(panD, BorderLayout.EAST);
-
-    fen.getRootPane().setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.DARK_GRAY));
-    //fen.getRootPane().setBackground(BackgroundFactory.);
-    fen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    fen.pack();
-    fen.setLocationRelativeTo(null);
-	  fen.setResizable(false);
-	  fen.setVisible(true);
 	}
 
 }

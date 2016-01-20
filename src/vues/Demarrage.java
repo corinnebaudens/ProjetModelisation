@@ -20,7 +20,7 @@ import javax.swing.event.ListSelectionListener;
 
 import controleur.Controleur;
 import modeles.Download;
-
+import modeles.Modele;
 
 
 
@@ -37,7 +37,7 @@ public class Demarrage {
 	Download dl;
 	
 		
-	public Demarrage(Controleur controleur) 
+	public Demarrage(Controleur controleur, Modele modele) 
 	{
 		  
 		  final JFrame fen= new JFrame("Traitement de Séries chronologiques boursières");
@@ -93,6 +93,7 @@ public class Demarrage {
 	      
 	      
 	      // Création du panneau droit
+	     // new PannDroit(modele, fen, panD);
 	      String [] test = {"titi","tutu"};
 	      ListGraph = new JList(test);
 	      scrollGraph = new JScrollPane(ListGraph); 

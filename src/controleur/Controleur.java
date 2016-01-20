@@ -1,5 +1,8 @@
 package controleur;
 import java.io.File;
+import java.util.ArrayList;
+
+import modeles.Coord;
 import modeles.Modele;
 
 public class Controleur {
@@ -13,13 +16,13 @@ public class Controleur {
 	}
 	
 
-	public Double[][] graphRequest (String ticker, String dateDebut, String dateFin){
+	public void graphRequest (String ticker, String dateDebut, String dateFin){
 		// todo : vérifier que la chaîne de caractères est valide
 		modele.setData(ticker, dateDebut, dateFin);
-		return modele.getData();
+
 	}
 	
-	public Double [][]  dataRequest(){
+	public ArrayList<Coord> dataRequest(){
 		return modele.getData();
 	}
 	
