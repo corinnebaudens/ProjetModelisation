@@ -58,16 +58,21 @@ public class Modele extends Observable{
 			notifyObservers();
 		}
 		if(process.equals("Régression Linéaire")){
-			LinearRegression linReg = LinearRegression.calcLinearReg(liste.getDateList(), liste.getOpenList());
+			LinearRegression linReg = LinearRegression.calcLinearReg(liste.getOpenList());
+			int taille = liste.getOpenList().size();
 			double a = linReg.getA();
 			double b = linReg.getB();
+			dataBase.clear();
+			for (int i = 0 ; i < taille; i++){
+				dataBase.add(new Coord(i ,a * (liste.getOpenList().get(taille - i - 1)) + b , ""));
+			}
 			modif = liste.histoAnnuel();
 			setData(modif);
 			setChanged();
 			notifyObservers();
 		}
 		if(process.equals("Moyenne Mobile")){
-			modif = MovingAverage.movingAverage(liste, 5);
+			modif = MovingAverage.movingAverage(liste, 10);
 			setData(modif);
 			setChanged();
 			notifyObservers();
@@ -76,27 +81,7 @@ public class Modele extends Observable{
 			ExpSmoothing.simpleExpSmoothing(dataBase, .4);
 			setChanged();
 			notifyObservers();
-		}
-		
-		
-//			case "Moyenne Annuelle": {
-//				modif = liste.histoAnnuel();
-//				setData(modif);
-////				setChanged();
-////				notifyObservers();
-//			}
-//			case "Régression Linéaire": {
-//				
-//			}
-//			case "Moyenne Mobile": {
-//				
-//			}
-//			case "Lissage Exponentiel Simple": {
-//				
-//			}
-//			default:
-//		}
-		
+		}		
 	}
 		
 	private void ajouterCoord(double x, double y, String z){
