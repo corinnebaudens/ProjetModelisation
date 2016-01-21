@@ -7,7 +7,7 @@ import java.util.Observable;
 public class Modele extends Observable{
 	
 	ArrayList<Coord> dataBase;
-	String ticker;
+	String ticker, process;
 	int anneeD, moisD, jourD, anneeF, moisF, jourF;
 	
 	public Modele(){
@@ -23,6 +23,12 @@ public class Modele extends Observable{
 		this.moisF=moisF;
 		this.jourF=jourF;
 		setData();
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void recupDonnees(String process){
+		this.process=process;
 		setChanged();
 		notifyObservers();
 	}

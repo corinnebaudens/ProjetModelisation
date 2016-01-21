@@ -36,7 +36,7 @@ public class Demarrage{
 	JTextField text, jourDebut, moisDebut, anneeDebut, jourFin, moisFin, anneeFin;
 	JDialog periode;
 	Download dl;
-	String ticker;
+	String ticker, process;
 	int anneeD, moisD, jourD, anneeF, moisF, jourF;
 	PannDroit p;
 	
@@ -84,7 +84,8 @@ public class Demarrage{
 	      
 	      // Création du panneau central
 	      		
-	      String [] itemsTraitement = {"Régression linéaire","Moyenne Mobile"};
+	      String [] itemsTraitement = {"Moyenne Hebdomadaire", "Moyenne Mensuelle", "Moyenne Annuelle",
+	    		  "Régression Linéaire","Moyenne Mobile", "Lissage Exponentiel Simple"};
 	      ListTraitement = new JList(itemsTraitement);
 	      ListTraitement.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	      scrollTraitement = new JScrollPane(ListTraitement);
@@ -100,7 +101,7 @@ public class Demarrage{
 	      
 	      	// gestion des événements liés au panneau central
 	      			ListTraitement.addMouseListener(new ClickTrait());
-	      
+	      		
 	      
 	      			
 	      // Création du panneau droit
@@ -247,7 +248,7 @@ public class Demarrage{
 						Object selectionValues[] = list.getSelectedValues();
 						for (int i=0, n=selection.length; i<n ; i++) {
 						ticker = (String) selectionValues[i];
-			}
+					}
 						
 }
 		@Override
@@ -278,11 +279,15 @@ public class Demarrage{
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			/* ***************************************************** */
-			/* insérer ici l'action de dessiner le panneaudroit */
-			/* ***************************************************** */
-					
-}
+			 // Récupération de la valeur sélectionnée dans la "liste de titre"
+			JList list = (JList) e.getSource();
+			int selection[] = list.getSelectedIndices();
+			Object selectionValues[] = list.getSelectedValues();
+			for (int i=0, n=selection.length; i<n ; i++) {
+			process = (String) selectionValues[i];
+			controleur.transfertDemande(ticker);
+		}
+	}
 
 		@Override
 		public void mouseEntered(MouseEvent arg0) {

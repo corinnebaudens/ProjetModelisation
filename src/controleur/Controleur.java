@@ -19,6 +19,10 @@ public class Controleur {
 		modele.recupDonnees(ticker, anneeD, moisD, jourD, anneeF, moisF, jourF);
 	}
 	
+	public void transfertDemande(String process){
+		modele.recupDonnees(process);
+	}
+	
 /*	public ArrayList<Coord> graphRequest (String ticker, int anneeD, int moisD, int jourD, int anneeF, int moisF, int jourF){		// todo : vérifier que la chaîne de caractères est valide
 		System.out.println("classe atteinte : Controleur");
 		modele.setData(ticker, anneeD, moisD, jourD, anneeF, moisF, jourF);
