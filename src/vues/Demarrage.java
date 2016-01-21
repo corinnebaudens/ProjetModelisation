@@ -100,7 +100,7 @@ public class Demarrage{
 	      // Création du panneau central
 	      		
 	      String [] itemsTraitement = {"Sans Traitement","Moyenne Hebdomadaire", "Moyenne Mensuelle", "Moyenne Annuelle",
-	    		  "Régression Linéaire","Moyenne Mobile", "Lissage Exponentiel Simple"};
+	    		  "Régression Linéaire (en cours)","Moyenne Mobile", "Lissage Exponentiel Simple"};
 	      ListTraitement = new JList(itemsTraitement);
 	      ListTraitement.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	      scrollTraitement = new JScrollPane(ListTraitement);

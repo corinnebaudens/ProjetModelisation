@@ -110,7 +110,7 @@ public class LinearRegression {
 	}
 	
 	public static void main(String args []) {
-		Historique liste = ConversionObjectCSV.CSVToHistorique(new File("AI.PA-201101-20151131.csv"));
+		Historique liste = ConversionObjectCSV.CSVToHistorique(new File("ALU.PA-201501-20151131.csv"));
 		LinearRegression lin = calcLinearReg(liste.getOpenList());
 		System.out.println(lin.getA() + "/" + lin.getB());
 	}
