@@ -18,7 +18,11 @@ import controleur.Controleur;
 import modeles.Coord;
 import modeles.Modele;
 
-
+/**
+ * 
+ * @author C. Baudens, V. Dubromez, G. Durand
+ *
+ */
 public class PannDroit implements Observer{
 	JPanel panD;
 	Border bd;
@@ -27,6 +31,13 @@ public class PannDroit implements Observer{
 	ArrayList<Coord> dataBase;
 	AffGraphique graphique;
 	
+	/**
+	 * Constructeur de la classe
+	 * @param modele l'instance de la classe Modele en cours
+	 * @param controleur l'instance de la classe Controleur en cours
+	 * @param fen l'instance de la JFrame qui regroupe l'ensemble des JPanel
+	 * @param panD l'instance du JPanel définissant le panneau droit
+	 */
 	public PannDroit(Modele modele, Controleur controleur, JFrame fen, JPanel panD){
 		modele.addObserver(this);
 		this.controleur=controleur;
@@ -36,10 +47,8 @@ public class PannDroit implements Observer{
 		bd = BorderFactory.createTitledBorder(EtchedBorderbd,"Résultat graphique",
 		TitledBorder.LEFT, TitledBorder.TOP,new Font("Arial", Font.BOLD,13),Color.BLUE);
 		graphique.setBorder(bd);
-//		scrollGraph.setPreferredSize(new Dimension(450,500));
 		panD = new JPanel();
 		panD.setPreferredSize(new Dimension(450,500));
-//		panD.setLayout(new FlowLayout());
 		panD.add(graphique);
 		panD.setOpaque(false);
 		this.panD=panD;
@@ -47,19 +56,18 @@ public class PannDroit implements Observer{
 
 	}
 	
-/*	public void dessiner(String ticker, int anneeD, int moisD, int jourD, int anneeF, int moisF, int jourF){
-		AffGraphique graphique = new AffGraphique(modele, controleur);
-		graphique.setBorder(bd);
-		panD.add(graphique);
-		panD.validate() ;
-		panD.repaint();
-	}
-*/
-
+	/**
+	 * 
+	 * @return l'instance du JPanel en cours
+	 */
 	public JPanel getPanD() {
 		return panD;
 	}
 
+	/**
+	 * met à jour l'attribut de classe JPanel
+	 * @param panD
+	 */
 	public void setPanD(JPanel panD) {
 		this.panD = panD;
 	}

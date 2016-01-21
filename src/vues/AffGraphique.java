@@ -14,6 +14,13 @@ import javax.swing.JPanel;
 import controleur.Controleur;
 
 @SuppressWarnings("serial")
+/**
+ * Réalise l'affichage du graphique
+ * @author C. Baudens, V. Dubromez, G. Durand
+ * @param	modele : l'instance de la classe Modele
+ * 			controleur : l'instance de la classe Controleur
+ * @return renvoit tous les éléments pour l'affichage de la courbe
+ */
 public class AffGraphique extends JPanel {
 	protected static final int GRAPHIC_SIZE = 400 ;
 	Modele modele ;
@@ -26,13 +33,22 @@ public class AffGraphique extends JPanel {
 	String ticker;
 	int anneeD, moisD, jourD, anneeF, moisF, jourF;
 	
-	
+	/**
+	 * Constructeur de la classe
+	 * @param modele l'instance de la classe Modele en cours
+	 * @param controleur l'instance de la classe Controleur en cours
+	 */
 	public AffGraphique(Modele modele, Controleur controleur) {
 		super() ;
 		this.modele = modele ;
 		this.setPreferredSize(new Dimension(GRAPHIC_SIZE,800)) ;
 	}
 
+	/**
+	 * 
+	 * @param g
+	 * @param dataBase la liste des points donnée par le modèle
+	 */
 	protected void drawData(Graphics g, ArrayList<Coord> dataBase) {
 		// Calcul d'échelle
 		minX = 0.0 ;
@@ -77,49 +93,10 @@ public class AffGraphique extends JPanel {
         super.paintComponent(g);       
         this.dataBase=modele.getData();
         if (dataBase.isEmpty()) {
-			g.drawString("Pas de donnée à afficher", 10, 20);
+			g.drawString("Aucune donnée à afficher", 30, 40);
 		}
 		else {
 			drawData(g, dataBase);
 		}
     }
-	
-	
-/*	protected void drawData(Graphics g, Double[][] data) {
-		minX = 0.0 ;
-		minY = 1000.0 ;
-		maxX = 0.0 ;
-		maxY = 0.0 ;
-		for (int i = 0 ; i < data.length ; i++) {
-			double x = data[i][0] ;
-			double y = data[i][1] ;
-			if (x > maxX) maxX = x ;
-			if (y > maxY) maxY = y ;
-			if (x < minX) minX = x ;
-			if (y < minY) minY = y ;
-		}
-	    g.setColor(Color.RED);
-	    int left = convX(minX) ;
-	    int width = convX(maxX) - convX(minX) ;
-	    int top = convY(maxY) ;
-	    int height = convY(minY) - convY(maxY) ;
-		
-	    g.setColor(Color.BLACK);
-	    g.drawLine(convX(0.0), convY(minY), convX(0.0), convY(maxY) );
-	    g.drawLine(convX(minX), convY(0.0), convX(maxX), convY(0.0) );
-	    
-	    double x0=0.0;
-	    double y0=0.0;
-	    double x1=0.0;
-	    double y1=0.0;
-	    for(int i=0; i<data.length; i++){
-	    		x1 = data[i][0];
-	    		y1 = data[i][1];
-	    		if(i!=0) g.drawLine(convX(x0), convY(y0), convX(x1), convY(y1));
-	    		x0=x1;
-	    		y0=y1;
-	    }        
-	}
-*/
-	
 }
