@@ -11,7 +11,7 @@ public class ExpSmoothing {
 	 * @param alpha le coefficient de lissage
 	 * @return un objet Coord contenant la prévision à l'instant t+1
 	 */
-	public static Coord simpleExpSmoothing (ArrayList<Coord> data, double alpha) {
+	public static void simpleExpSmoothing (ArrayList<Coord> data, double alpha) {
 		int index, dataSize = data.size();
 		int x = 100;
 		double a = alpha;
@@ -28,7 +28,7 @@ public class ExpSmoothing {
 			yPrev = a * data.get(i).getY() + (1 - a) * yPrev;
 		}
 
-		return new Coord(data.get(dataSize - 1).getX() + 1, yPrev, "");
+		data.add(new Coord(data.get(dataSize - 1).getX() + 1, yPrev, ""));
 	}
 	
 	
