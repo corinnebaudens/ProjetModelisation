@@ -30,7 +30,7 @@ import modeles.Modele;
  *
  **/
 
-public class Demarrage{
+public class Vue{
 	
 	/**
 	 * fen   représente la fenêtre générale de l'application.
@@ -56,7 +56,7 @@ public class Demarrage{
 	PannDroit p;
 	
 		
-	public Demarrage(Controleur controleur, Modele modele)
+	public Vue(Controleur controleur, Modele modele)
 	{
 		this.controleur=controleur;
 		this.modele=modele;

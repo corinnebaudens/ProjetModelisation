@@ -1,7 +1,7 @@
 package controleur;
 import modeles.Modele;
 
-import vues.Demarrage;
+import vues.Vue;
 
 public class Lanceur {
 	/*
@@ -13,7 +13,7 @@ public class Lanceur {
 	public static void main(String[] args) {
 		Modele modele = new Modele();
 		Controleur controleur = new Controleur(modele);
-		Demarrage vue = new Demarrage(controleur, modele);	// il faut que l'instanciation de la vue
+		Vue vue = new Vue(controleur, modele);	// il faut que l'instanciation de la vue
 												// prenne une instance de Controleur en paramètre
 	}
 }
