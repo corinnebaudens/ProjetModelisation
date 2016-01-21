@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -33,10 +35,10 @@ public class Demarrage {
 	Download dl;
 	
 		
-	public Demarrage(Controleur controleur, Modele modele) 
+	public Demarrage(Controleur controleur, Modele modele)
 	{
 		  
-		  final JFrame fen= new JFrame("Traitement de Séries chronologiques boursières");
+		  final JFrame fen= new JFrame("Traitement de Séries chronologiques boursières  (version 1.0)       Application conçue par C.BAUDENS, V.DUBROMEZ, G.DURAND");
 	      fen.setPreferredSize(new Dimension(900,630));
 		  	  		  
 		  // Création du panneau gauche
@@ -65,7 +67,7 @@ public class Demarrage {
 	      		panG.setPreferredSize(new Dimension(150,500));
 	      			     
 	      		// gestion des événements liés au panneau gauche
-	      		ListTitre.addMouseListener(new BtCharger());
+	      		ListTitre.addMouseListener(new ClickTitre());
 	      		Bouton.addActionListener(new BtCharger());
 	      				
 	          
@@ -87,7 +89,11 @@ public class Demarrage {
 	      panC.add(scrollTraitement);
 	      panC.setOpaque(false);
 	      
+	      	// gestion des événements liés au panneau central
+	      			ListTraitement.addMouseListener(new ClickTrait());
 	      
+	      
+	      			
 	      // Création du panneau droit
 	      PannDroit p = new PannDroit(modele, controleur, fen, panD);
 	      panD = p.getPanD();
@@ -101,17 +107,29 @@ public class Demarrage {
 	      fen.getContentPane().add(panD, BorderLayout.EAST);
 	
 	      fen.getRootPane().setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.DARK_GRAY));
-	      fen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	      fen.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	      fen.pack();
 	      fen.setLocationRelativeTo(null);
 		  fen.setResizable(false);
-		  fen.setVisible(true);
 		  
+		  fen.addWindowListener(new WindowAdapter(){
+		        public void windowClosing(WindowEvent e){
+		              int reponse = JOptionPane.showConfirmDialog(fen,
+		                                   "Voulez-vous quitter l'application ?",
+		                                   "Confirmation",
+		                                   JOptionPane.YES_NO_OPTION,
+		                                   JOptionPane.QUESTION_MESSAGE);
+		              if (reponse==JOptionPane.YES_OPTION){
+		                      fen.dispose();
+		              }
+		        }});
+		  
+		  fen.setVisible(true);
 		  
 		  // Création de la fenêtre modale
 		  JDialog modal = new JDialog(fen,false);
-	      modal.setTitle("Bienvenue sur notre application boursière");
-	      modal.setPreferredSize(new Dimension(470,400));
+	      modal.setTitle("Bienvenue sur notre application boursière           Version 1.0");
+	      modal.setPreferredSize(new Dimension(470,350));
 	      modal.setLocation(580, 280);	      
 	      JLabel label = new JLabel();
 	      label.setBackground(Color.ORANGE);
@@ -125,7 +143,8 @@ public class Demarrage {
 	      		+ "<br>la date de début et de fin de période à extraire."
 	      		+ "<br>Enfin cliquer sur le bouton <B>charger le titre sélectionné</B>"
 	      		+ "<br>Ensuite vous devez choisir le traitement mathématique à appliquer."
-	      		+ "<br><br>Vous verrez alors apparaitre le graphique correspondant à vos choix.<br><br><Html>");
+	      		+ "<br><br>Vous verrez alors apparaitre le graphique correspondant à vos choix.<br><br></html>");
+	      		
 	      modal.add(label, BorderLayout.PAGE_START);
 	      modal.pack();
 	      modal.setLocationRelativeTo(null);
@@ -136,10 +155,9 @@ public class Demarrage {
 	
 // Classes externes pour la gestion des évenements
 	
-	public class BtCharger implements ListSelectionListener, ActionListener, MouseListener {
+	// Gestion du Click sur le bouton "Charger le titre sélectionné"
+	public class BtCharger implements ActionListener {
 		
-		
-		// Gestion du Click sur le bouton "Charger le titre sélectionné"
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
@@ -149,60 +167,65 @@ public class Demarrage {
 					Integer.parseInt(anneeFin.getText()),
 					Integer.parseInt(moisFin.getText()),
 					Integer.parseInt(jourFin.getText()));
+			}
 		}
 		
-		// Gestion du Click sur la "liste des titres"		
+	
+	// Gestion du Click sur la "liste des titres"	
+	public class ClickTitre implements MouseListener {
+		
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			
 				// création de la boite de dialogue pour demande des périodes début et fin
 						JDialog periode = new JDialog();
 						periode.setTitle("Saisir la période à télécharger");
-						periode.setPreferredSize(new Dimension(400,200));
+						periode.setPreferredSize(new Dimension(300,150));
 					    periode.setLocation(380, 280);
-					    		
+
+					    	    		
 					 //création de la zone "DEBUT"
 						JLabel labelDebut = new JLabel("Début :");
-						labelDebut.setBounds(50,65,150,15);
+						labelDebut.setBounds(50,15,150,15);
 					    periode.add(labelDebut);
 					    		    
 					    anneeDebut = new JTextField();
-					    anneeDebut.setBounds(180,60,60,25);
+					    anneeDebut.setBounds(100,10,60,25);
 					    periode.add(anneeDebut);
 					    
 					    moisDebut = new JTextField();
-					    moisDebut.setBounds(240,60,40,25);
+					    moisDebut.setBounds(170,10,40,25);
 					    periode.add(moisDebut);
 					    
 					    jourDebut = new JTextField();
-					    jourDebut.setBounds(300,60,40,25);
+					    jourDebut.setBounds(220,10,40,25);
 					    periode.add(jourDebut);    
 					    					    
 					      
 					 //création de la zone "FIN"
 					    JLabel labelFin = new JLabel("Fin :");
-						labelFin.setBounds(50,100,150,15);
+						labelFin.setBounds(50,80,150,15);
 					    periode.add(labelFin);
 						
 					    anneeFin = new JTextField();
-					    anneeFin.setBounds(180,95,60,25);
+					    anneeFin.setBounds(100,75,60,25);
 					    periode.add(anneeFin);
 					    					    
 					    moisFin = new JTextField();
-					    moisFin.setBounds(240,95,40,25);
+					    moisFin.setBounds(170,75,40,25);
 					    periode.add(moisFin);
 					    
 					    jourFin = new JTextField();
-					    jourFin.setBounds(300,95,40,25);
+					    jourFin.setBounds(220,75,40,25);
 					    periode.add(jourFin);		      
 					    	      
 					  		     
-				        JLabel labelJJMMAA2 = new JLabel("(aaaa/mm/jj)");
-					    labelJJMMAA2.setBounds(380,100,250,15);
-					    labelJJMMAA2.setFont(new Font("helvetica",Font.PLAIN,13));
-					    periode.add(labelJJMMAA2);
-					     
-						
+				        JLabel labelJJMMAA = new JLabel("aaaa/mm/jj");
+					    labelJJMMAA.setBounds(300,100,150,15);
+					    labelJJMMAA.setFont(new Font("helvetica",Font.PLAIN,13));
+					    labelJJMMAA.setForeground(Color.BLUE);
+					    periode.add(labelJJMMAA);
+					    
 						periode.setModal(false);
 					    periode.pack();
 					    periode.setVisible(true);
@@ -214,7 +237,6 @@ public class Demarrage {
 						int selection[] = list.getSelectedIndices();
 						Object selectionValues[] = list.getSelectedValues();
 						for (int i=0, n=selection.length; i<n ; i++) {
-						System.out.println(selectionValues[i]);
 						rec = (String) selectionValues[i];
 			}
 						
@@ -239,10 +261,44 @@ public class Demarrage {
 			// TODO Auto-generated method stub
 			
 		}
+}
+		
+
+	// Gestion du Click sur la "liste des traitements"	
+	public class ClickTrait implements MouseListener {
+		
 		@Override
-		public void valueChanged(ListSelectionEvent arg0) {
+		public void mouseClicked(MouseEvent e) {
+			/* ***************************************************** */
+			/* insérer ici l'action de dessiner le panneaudroit */
+			/* ***************************************************** */
+					
+}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
 		}
 	}
 }
+
+
