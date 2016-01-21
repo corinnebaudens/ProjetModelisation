@@ -28,9 +28,75 @@ public class Modele extends Observable{
 	}
 	
 	public void recupDonnees(String process){
-		this.process=process;
-		setChanged();
-		notifyObservers();
+		this.process = process;
+		Historique modif;
+		File fichier = new File(ticker + "-" + anneeD + (moisD-1)
+				+ jourD + "-" + anneeF + (moisF-1) + jourF + ".csv");
+		Historique liste = ConversionObjectCSV.CSVToHistorique(fichier);
+		
+		if(process.equals("Sans Traitement")){
+			setData(liste);
+			setChanged();
+			notifyObservers();
+		}
+		if(process.equals("Moyenne Hebdomadaire")){
+			modif = liste.histoHebdo();
+			setData(modif);
+			setChanged();
+			notifyObservers();
+		}
+		if(process.equals("Moyenne Mensuelle")){
+			modif = liste.histoMensuel();
+			setData(modif);
+			setChanged();
+			notifyObservers();
+		}
+		if(process.equals("Moyenne Annuelle")){
+			modif = liste.histoAnnuel();
+			setData(modif);
+			setChanged();
+			notifyObservers();
+		}
+		if(process.equals("Régression Linéaire")){
+			LinearRegression linReg = LinearRegression.calcLinearReg(liste.getDateList(), liste.getOpenList());
+			double a = linReg.getA();
+			double b = linReg.getB();
+			modif = liste.histoAnnuel();
+			setData(modif);
+			setChanged();
+			notifyObservers();
+		}
+		if(process.equals("Moyenne Mobile")){
+			modif = MovingAverage.movingAverage(liste, 5);
+			setData(modif);
+			setChanged();
+			notifyObservers();
+		}
+		if(process.equals("Lissage Exponentiel Simple")){
+			ExpSmoothing.simpleExpSmoothing(dataBase, .4);
+			setChanged();
+			notifyObservers();
+		}
+		
+		
+//			case "Moyenne Annuelle": {
+//				modif = liste.histoAnnuel();
+//				setData(modif);
+////				setChanged();
+////				notifyObservers();
+//			}
+//			case "Régression Linéaire": {
+//				
+//			}
+//			case "Moyenne Mobile": {
+//				
+//			}
+//			case "Lissage Exponentiel Simple": {
+//				
+//			}
+//			default:
+//		}
+		
 	}
 		
 	private void ajouterCoord(double x, double y, String z){
@@ -51,6 +117,16 @@ public class Modele extends Observable{
 		if(!dataBase.isEmpty()) dataBase.clear();
 		for (int ligne = 0 ; ligne < taille ; ligne++){
 			ajouterCoord(ligne, test.getOpenList().get(taille - ligne - 1), test.getCotation(taille - ligne - 1).getDateFormatted());
+		}
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void setData(Historique hist){
+		int taille = hist.taille();
+		if(!dataBase.isEmpty()) dataBase.clear();
+		for (int ligne = 0 ; ligne < taille ; ligne++){
+			ajouterCoord(ligne, hist.getOpenList().get(taille - ligne - 1), hist.getCotation(taille - ligne - 1).getDateFormatted());
 		}
 		setChanged();
 		notifyObservers();
