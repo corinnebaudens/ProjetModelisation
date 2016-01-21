@@ -23,8 +23,23 @@ import controleur.Controleur;
 import modeles.Download;
 import modeles.Modele;
 
+/**
+ * <b> Vue est la classe qui créée l'interface graphique de l'application.</b>
+ * 
+ * @author C.BAUDENS, V.DUBROMEZ, G.DURAND
+ *
+ **/
 
 public class Demarrage{
+	
+	/**
+	 * fen   représente la fenêtre générale de l'application.
+	 * ListTitre représente la liste des titres boursiers disponibles.
+	 * ListTraitement représente la liste des traitements statiques/mathématiques disponibles.
+	 * periode représente la boite de dialogue pour renseigner les dates de début et dates de fin de périodes.
+	 * modal représente la boite de dialogue de bienvenue qui s'affiche à l'ouverture de l'application.
+	 * 
+	 */
 
 	Controleur controleur;
 	Modele modele;
@@ -34,7 +49,7 @@ public class Demarrage{
 	JButton Bouton;
 	JPanel panG, panC, panD, panelBouton, panelPeriode;
 	JTextField text, jourDebut, moisDebut, anneeDebut, jourFin, moisFin, anneeFin;
-	JDialog periode;
+	JDialog periode, modal;
 	Download dl;
 	String ticker, process;
 	int anneeD, moisD, jourD, anneeF, moisF, jourF;
@@ -47,7 +62,7 @@ public class Demarrage{
 		this.modele=modele;
 
 		  
-		  final JFrame fen= new JFrame("Traitement de Séries chronologiques boursières  (version 1.0)       Application conçue par C.BAUDENS, V.DUBROMEZ, G.DURAND");
+		  fen= new JFrame("Traitement de Séries chronologiques boursières  (version 1.0)       Application conçue par C.BAUDENS, V.DUBROMEZ, G.DURAND");
 	      fen.setPreferredSize(new Dimension(900,630));
 		  	  		  
 		  // Création du panneau gauche
@@ -84,7 +99,7 @@ public class Demarrage{
 	      
 	      // Création du panneau central
 	      		
-	      String [] itemsTraitement = {"Moyenne Hebdomadaire", "Moyenne Mensuelle", "Moyenne Annuelle",
+	      String [] itemsTraitement = {"Sans Traitement","Moyenne Hebdomadaire", "Moyenne Mensuelle", "Moyenne Annuelle",
 	    		  "Régression Linéaire","Moyenne Mobile", "Lissage Exponentiel Simple"};
 	      ListTraitement = new JList(itemsTraitement);
 	      ListTraitement.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -140,7 +155,7 @@ public class Demarrage{
 		  fen.setVisible(true);
 		  
 		  // Création de la fenêtre modale
-		  JDialog modal = new JDialog(fen,false);
+		  modal = new JDialog(fen,false);
 	      modal.setTitle("Bienvenue sur notre application boursière           Version 1.0");
 	      modal.setPreferredSize(new Dimension(470,350));
 	      modal.setLocation(580, 280);	      
