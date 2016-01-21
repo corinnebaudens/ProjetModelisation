@@ -15,12 +15,16 @@ public class Controleur {
 		this.modele=bourse;		
 	}
 	
-	public ArrayList<Coord> graphRequest (String ticker, String dateDebut, String dateFin){
-		// todo : vérifier que la chaîne de caractères est valide
-		modele.setData(ticker, dateDebut, dateFin);
-		return modele.getData();
+	public void transfertDemande(String ticker, int anneeD, int moisD, int jourD, int anneeF, int moisF, int jourF){
+		modele.recupDonnees(ticker, anneeD, moisD, jourD, anneeF, moisF, jourF);
 	}
 	
+/*	public ArrayList<Coord> graphRequest (String ticker, int anneeD, int moisD, int jourD, int anneeF, int moisF, int jourF){		// todo : vérifier que la chaîne de caractères est valide
+		System.out.println("classe atteinte : Controleur");
+		modele.setData(ticker, anneeD, moisD, jourD, anneeF, moisF, jourF);
+		return modele.getData();
+	}
+*/	
 	public ArrayList<Coord> dataRequest(){
 		return modele.getData();
 	}

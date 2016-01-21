@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -22,8 +24,10 @@ import modeles.Download;
 import modeles.Modele;
 
 
-public class Demarrage {
+public class Demarrage{
 
+	Controleur controleur;
+	Modele modele;
 	JFrame fen;
 	JScrollPane scrollTitre, scrollTraitement, scrollGraph;
 	JList ListTitre, ListTraitement, ListGraph;
@@ -31,12 +35,17 @@ public class Demarrage {
 	JPanel panG, panC, panD, panelBouton, panelPeriode;
 	JTextField text, jourDebut, moisDebut, anneeDebut, jourFin, moisFin, anneeFin;
 	JDialog periode;
-	String rec;
 	Download dl;
+	String ticker;
+	int anneeD, moisD, jourD, anneeF, moisF, jourF;
+	PannDroit p;
 	
 		
 	public Demarrage(Controleur controleur, Modele modele)
 	{
+		this.controleur=controleur;
+		this.modele=modele;
+
 		  
 		  final JFrame fen= new JFrame("Traitement de Séries chronologiques boursières  (version 1.0)       Application conçue par C.BAUDENS, V.DUBROMEZ, G.DURAND");
 	      fen.setPreferredSize(new Dimension(900,630));
@@ -95,11 +104,13 @@ public class Demarrage {
 	      
 	      			
 	      // Création du panneau droit
-	      PannDroit p = new PannDroit(modele, controleur, fen, panD);
+	      p = new PannDroit(modele, controleur, fen, panD);
 	      panD = p.getPanD();
-	      p.dessiner();
+//	      p.dessiner();		à supprimer - ligne pour test fonctionnel
 	      
-	     
+
+	      
+	      
 	      // Ajout des panneaux à la JFrame
 	      fen.getContentPane().setBackground(Color.LIGHT_GRAY);
 	      fen.getContentPane().add(panG, BorderLayout.WEST);
@@ -121,6 +132,7 @@ public class Demarrage {
 		                                   JOptionPane.QUESTION_MESSAGE);
 		              if (reponse==JOptionPane.YES_OPTION){
 		                      fen.dispose();
+		                      periode.dispose();
 		              }
 		        }});
 		  
@@ -160,17 +172,19 @@ public class Demarrage {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			dl = new Download(rec,Integer.parseInt(anneeDebut.getText()),
-					Integer.parseInt(moisDebut.getText()),
-					Integer.parseInt(jourDebut.getText()),
-					Integer.parseInt(anneeFin.getText()),
-					Integer.parseInt(moisFin.getText()),
-					Integer.parseInt(jourFin.getText()));
-			}
-		}
 		
-	
+		    anneeD = Integer.parseInt(anneeDebut.getText());
+			moisD = Integer.parseInt(moisDebut.getText());
+			jourD = Integer.parseInt(jourDebut.getText());
+			anneeF = Integer.parseInt(anneeFin.getText());
+			moisF = Integer.parseInt(moisFin.getText());
+			jourF = Integer.parseInt(jourFin.getText());
+			
+			controleur.transfertDemande(ticker, anneeD, moisD, jourD, anneeF, moisF, jourF);
+			periode.dispose();								//fermeture de la fenêtre JDialog
+		}
+	}
+		
 	// Gestion du Click sur la "liste des titres"	
 	public class ClickTitre implements MouseListener {
 		
@@ -178,11 +192,10 @@ public class Demarrage {
 		public void mouseClicked(MouseEvent e) {
 			
 				// création de la boite de dialogue pour demande des périodes début et fin
-						JDialog periode = new JDialog();
+						periode = new JDialog();
 						periode.setTitle("Saisir la période à télécharger");
 						periode.setPreferredSize(new Dimension(300,150));
 					    periode.setLocation(380, 280);
-
 					    	    		
 					 //création de la zone "DEBUT"
 						JLabel labelDebut = new JLabel("Début :");
@@ -200,7 +213,6 @@ public class Demarrage {
 					    jourDebut = new JTextField();
 					    jourDebut.setBounds(220,10,40,25);
 					    periode.add(jourDebut);    
-					    					    
 					      
 					 //création de la zone "FIN"
 					    JLabel labelFin = new JLabel("Fin :");
@@ -217,8 +229,7 @@ public class Demarrage {
 					    
 					    jourFin = new JTextField();
 					    jourFin.setBounds(220,75,40,25);
-					    periode.add(jourFin);		      
-					    	      
+					    periode.add(jourFin);
 					  		     
 				        JLabel labelJJMMAA = new JLabel("aaaa/mm/jj");
 					    labelJJMMAA.setBounds(300,100,150,15);
@@ -230,14 +241,12 @@ public class Demarrage {
 					    periode.pack();
 					    periode.setVisible(true);
 					    
-					    
 					  // Récupération de la valeur sélectionnée dans la "liste de titre"
-				  			    
 					   	JList list = (JList) e.getSource();
 						int selection[] = list.getSelectedIndices();
 						Object selectionValues[] = list.getSelectedValues();
 						for (int i=0, n=selection.length; i<n ; i++) {
-						rec = (String) selectionValues[i];
+						ticker = (String) selectionValues[i];
 			}
 						
 }
@@ -296,9 +305,10 @@ public class Demarrage {
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+		
 		}
 	}
-}
 
+
+}
 
