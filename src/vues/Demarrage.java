@@ -247,8 +247,8 @@ public class Demarrage{
 						int selection[] = list.getSelectedIndices();
 						Object selectionValues[] = list.getSelectedValues();
 						for (int i=0, n=selection.length; i<n ; i++) {
-						ticker = (String) selectionValues[i];
-					}
+							ticker = (String) selectionValues[i];
+						}
 						
 }
 		@Override
@@ -284,9 +284,10 @@ public class Demarrage{
 			int selection[] = list.getSelectedIndices();
 			Object selectionValues[] = list.getSelectedValues();
 			for (int i=0, n=selection.length; i<n ; i++) {
-			process = (String) selectionValues[i];
-			controleur.transfertDemande(ticker);
-		}
+				process = (String) selectionValues[i];
+			}
+			controleur.transfertDemande(process);
+
 	}
 
 		@Override

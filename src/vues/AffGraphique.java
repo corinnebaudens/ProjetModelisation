@@ -74,8 +74,6 @@ public class AffGraphique extends JPanel {
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-        System.out.println("classe atteinte : AffGraphique.paintComponent");
-	
         super.paintComponent(g);       
         this.dataBase=modele.getData();
         if (dataBase.isEmpty()) {
