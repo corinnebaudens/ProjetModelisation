@@ -25,6 +25,17 @@ public class Cotation {
 	private String[] data;
 	
 	// Constructeurs
+	/**
+	 * Constructeur d'une cotation journalière en indiquant chacun des paramètres séparément
+	 * @param ticker
+	 * @param date date sous forme de chaine "AAAA-MM-JJ"
+	 * @param open
+	 * @param high
+	 * @param low
+	 * @param close
+	 * @param volume
+	 * @param adjusted
+	 */
 	public Cotation(String ticker, String date, double open, double high, double low, double close,
 			int volume, double adjusted) {
 		this.ticker = ticker;
@@ -37,6 +48,17 @@ public class Cotation {
 		this.adjusted = adjusted;
 	}
 	
+	/**
+	 * Constructeur d'une cotation journalière en indiquant chacun des paramètres séparément
+	 * @param ticker
+	 * @param date date sous la forme d'un objet {@link GregorianCalendar}
+	 * @param open
+	 * @param high
+	 * @param low
+	 * @param close
+	 * @param volume
+	 * @param adjusted
+	 */
 	public Cotation(String ticker, GregorianCalendar date, double open, double high, double low,
 			double close, int volume, double adjusted) {
 		this.ticker = ticker;
@@ -49,6 +71,12 @@ public class Cotation {
 		this.adjusted = adjusted;
 	}
 
+	/**
+	 * Constructeur d'une cotation journalière en indiquant ses données sous la forme d'une chaine
+	 * @param ticker
+	 * @param data
+	 * @param separator le séparateur du fichier csv
+	 */
 	public Cotation (String ticker, String data, String separator) {
 		this.ticker = ticker;
 		this.data = data.split(separator);
@@ -128,7 +156,7 @@ public class Cotation {
 	
 	// Méthodes accessibles dans le package
 	/**
-	 * Transforme la date donnée sous forme de chaine de caractères en objet GregorienCalendar 
+	 * Transforme la date donnée sous forme d'une chaine "AAAA-MM-YY" en objet GregorianCalendar 
 	 * @return the date
 	 */
 	protected static GregorianCalendar parseDate(String chaine) {

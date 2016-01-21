@@ -16,6 +16,16 @@ public class Download {
 	
 	private File fichier;
 	
+	/**
+	 * Constructeur prenant les paramètres de la date sous forme décomposée d'entiers
+	 * @param ticker le titre de l'action
+	 * @param startYear année de début
+	 * @param startMonth mois de début
+	 * @param startDay jour de début
+	 * @param endYear année de fin
+	 * @param endMonth mois de fin
+	 * @param endDay jour de fin
+	 */
 	public Download(String ticker, int startYear, int startMonth, int startDay,
 			int endYear, int endMonth, int endDay)
 	{
@@ -23,6 +33,12 @@ public class Download {
 				endYear, (endMonth-1), endDay);
 	}
 	
+	/**
+	 * Constructeur prenant les paramètres de la date sous forme de chaine
+	 * @param ticker le titre de l'action
+	 * @param debut date de début
+	 * @param fin date de fin
+	 */
 	public Download(String ticker, String debut, String fin)
 	{
 		GregorianCalendar dateD = Cotation.parseDate(debut);
@@ -37,7 +53,9 @@ public class Download {
 				endYear, endMonth, endDay);
 	}
 	
-	
+	/**
+	 * Méthode interne de téléchargement des données sous forme d'un fichier csv
+	 */
 	private File telecharger(String ticker, int startYear, int startMonth, int startDay,
 			int endYear, int endMonth, int endDay)
 	{
@@ -50,9 +68,9 @@ public class Download {
 			URL url = new URL(link);
 			
 
-/*			System.setProperty("http.proxyHost", "cache.univ-lille1.fr");
+			System.setProperty("http.proxyHost", "cache.univ-lille1.fr");
 			System.setProperty("http.proxyPort", "3128");
-*/			
+			
 			
 			InputStreamReader isr = new InputStreamReader(url.openStream());
 			BufferedReader in = new BufferedReader(isr);

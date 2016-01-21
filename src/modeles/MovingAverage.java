@@ -14,7 +14,7 @@ public class MovingAverage {
 	public static Historique movingAverage(Historique hist, int order) {
 		Historique result = new Historique();
 		
-		// On boucle sur les données de de réference (taille de 'hist' - 'order' lignes)
+		// Boucle sur les données de réference (taille de 'hist' - 'order' lignes)
 		int boucle = hist.taille() - order;
 		String ticker = hist.getTicker();
 		Cotation tempCot;
@@ -44,7 +44,7 @@ public class MovingAverage {
 			close /= order;
 			volume /= order;
 			adjusted /= order;
-			// Ajoute des valeurs obtenues
+			// Ajout des valeurs obtenues
 			result.ajouter(new Cotation(ticker, tempDate, open, high, low, close, volume, adjusted));
 		}
 		return result;

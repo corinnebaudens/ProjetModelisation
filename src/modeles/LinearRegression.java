@@ -10,12 +10,21 @@ public class LinearRegression {
 	double b;
 	double rSquare;
 	
+	/**
+	 * Constructeur par défaut
+	 */
 	public LinearRegression() {
 		this.a = 0.0;
 		this.b = 0.0;
 		this.rSquare = 0.0;
 	}
-
+	
+	/**
+	 * Constructeur complet
+	 * @param a
+	 * @param b
+	 * @param rSquare
+	 */
 	public LinearRegression(double a, double b, double rSquare) {
 		this.a = a;
 		this.b = b;
@@ -77,11 +86,14 @@ public class LinearRegression {
 		return new LinearRegression(a, b, rSquare);
 	}
 	
-	/*
-	 * Première version où les écarts entre deux dates se comptent en jours et non en millisecondes
-	 * Peut-être moins logique pour tracer la courbe (donne des valeurs similaires au calcul
-	 * LibreOffice
-	 */
+//	/**
+//	 * Première version où les écarts entre deux dates se comptent en jours et non en millisecondes
+//	 * Peut-être moins logique pour tracer la courbe (donne des valeurs similaires au calcul
+//	 * LibreOffice
+//	 * @param x
+//	 * @param y
+//	 * @return
+//	 */
 //	public static LinearRegression calcLinearReg(List<GregorianCalendar> x, List<Double> y) {
 //		double a = 0.0, b = 0.0, rSquare;
 //		// transformer la liste de date en liste d'entier

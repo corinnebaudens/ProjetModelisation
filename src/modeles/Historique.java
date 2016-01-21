@@ -35,10 +35,16 @@ public class Historique {
 	}
 	
 	// Accesseurs
+	/**
+	 * @return le nombre de valeurs du titre
+	 */
 	public int taille() {
 		return date.size();
 	}
 	
+	/**
+	 * @return le ticker du titre
+	 */
 	public String getTicker() {
 		return ticker;
 	}
@@ -92,13 +98,21 @@ public class Historique {
 		return adjusted;
 	}
 
+	/**
+	 * @param index l'indice de la cotation souhaitée
+	 * @return les valeurs sous la forme d'un objet Cotation
+	 */
 	public Cotation getCotation(int index){
 		return new Cotation(ticker, date.get(index), open.get(index), high.get(index), low.get(index),
 				close.get(index), volume.get(index), adjusted.get(index));
 	}
 	
-	// Méthodes publiques de gestion de la liste (à compléter éventuellement)
-	public void ajouter(Cotation cot){
+	// Méthodes de gestion de la liste (à compléter éventuellement)
+	/**
+	 * @param cot la cotation à ajouter (utilisée par la classe Download,
+	 * à manipuler avec précaution pour l'ordre des dates)
+	 */
+	protected void ajouter(Cotation cot){
 		if (this.ticker == null)
 			this.ticker = cot.getTicker();
 		this.date.add(cot.getDate());
@@ -110,6 +124,10 @@ public class Historique {
 		this.adjusted.add(cot.getAdjusted());	
 	}
 	
+	/**
+	 * @param index l'index de la cotation à supprimer
+	 * @return la cotation supprimée
+	 */
 	public Cotation supprimer(int index) {
 		Cotation result =  new Cotation(ticker, date.remove(index), open.remove(index),
 				high.remove(index), low.remove(index), close.remove(index), volume.remove(index),
@@ -117,12 +135,19 @@ public class Historique {
 		return result;
 	}
 	
+	/**
+	 * @return la cotation en tête de liste
+	 */
 	public Cotation supprimerPremiere() {
 		Cotation result =  new Cotation(ticker, date.remove(0), open.remove(0), high.remove(0),
 				low.remove(0), close.remove(0), volume.remove(0), adjusted.remove(0));
 		return result;
 	}
 	
+	/**
+	 * @param chaine la date de la cotation à supprimer
+	 * @return la cotation supprimée si elle existe
+	 */
 	public Cotation supprimerDate(String chaine) {
 		GregorianCalendar cal = Cotation.parseDate(chaine);
 		int index = 0;
@@ -134,6 +159,12 @@ public class Historique {
 		return null;
 	}
 	
+	/**
+	 * Calcul pour l'historique concerné des valeurs moyennes (open, close, adjusted), minimum (low),
+	 * maximum (high) ou cumulées (volume) hebdomadaires. Le jour de la cotation est arbitrairement choisi au
+	 * premier jour de la semaine condernée.
+	 * @return un nouvel historique contenant des valeurs hebdomadaires
+	 */
 	public Historique histoHebdo() {
 		Historique hebdo = new Historique();
 		String ticker = this.getTicker();
@@ -167,6 +198,12 @@ public class Historique {
 		return hebdo;
 	}
 	
+	/**
+	 * Calcul pour l'historique concerné des valeurs moyennes (open, close, adjusted), minimum (low),
+	 * maximum (high) ou cumulées (volume) mensuelles. Le jour de la cotation est arbitrairement choisi au
+	 * premier jour du mois conderné.
+	 * @return un nouvel historique contenant des valeurs mensuelles
+	 */
 	public Historique histoMensuel() {
 		Historique mensuel = new Historique();
 		String ticker = this.getTicker();
@@ -201,6 +238,12 @@ public class Historique {
 		return mensuel;
 	}
 	
+	/**
+	 * Calcul pour l'historique concerné des valeurs moyennes (open, close, adjusted), minimum (low),
+	 * maximum (high) ou cumulées (volume) annuelles. Le jour de la cotation est arbitrairement choisi au
+	 * premier jour de l'année condernée.
+	 * @return un nouvel historique contenant des valeurs annuelles
+	 */
 	public Historique histoAnnuel() {
 		Historique annuel = new Historique();
 		String ticker = this.getTicker();

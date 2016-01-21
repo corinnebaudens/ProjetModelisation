@@ -55,7 +55,7 @@ public class ConversionObjectCSV {
 	/**
 	 * Passage de l'objet au fichier CSV
 	 * @param histo
-	 * @return le fichier créé
+	 * @return le fichier créé sous forme d'un objet File
 	 */
 	public File HistoriqueToCSV(Historique histo){
 		// Nom de fichier à modifier par la suite (par exemple avec le nom de la modification apportée)
